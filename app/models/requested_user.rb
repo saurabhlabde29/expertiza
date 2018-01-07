@@ -1,7 +1,12 @@
 class RequestedUser < ActiveRecord::Base
   before_save { self.email = email.downcase }
   before_save { self.name }
+<<<<<<< HEAD
   validates :name, presence: true, length: {maximum: 50, message: "is too long"}
+=======
+  attr_accessible
+  validates :name, presence: true, length: {maximum: 50}
+>>>>>>> 756985284477d211d8d22b6f7b8f6f86576ae0db
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, length: {maximum: 255, message: "is too long"},
                     format: {with: VALID_EMAIL_REGEX, message: "format is wrong"},

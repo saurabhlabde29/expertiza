@@ -4,7 +4,13 @@ class AssignmentTeam < Team
   has_many :review_mappings, class_name: 'ReviewResponseMap', foreign_key: 'reviewee_id'
   has_many :review_response_maps, foreign_key: 'reviewee_id'
   has_many :responses, through: :review_response_maps, foreign_key: 'map_id'
+<<<<<<< HEAD
   include FileSupport
+=======
+
+  attr_accessible
+
+>>>>>>> 756985284477d211d8d22b6f7b8f6f86576ae0db
   # START of contributor methods, shared with AssignmentParticipant
 
   # Whether this team includes a given participant or not

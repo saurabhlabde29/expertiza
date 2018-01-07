@@ -1,7 +1,11 @@
 require 'import_support'
 class CourseParticipant < Participant
   belongs_to :course, class_name: 'Course', foreign_key: 'parent_id'
+<<<<<<< HEAD
   extend ImportSupport
+=======
+  attr_accessible
+>>>>>>> 756985284477d211d8d22b6f7b8f6f86576ae0db
 
   # Copy this participant to an assignment
   def copy(assignment_id)

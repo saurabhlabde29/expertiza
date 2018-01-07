@@ -133,7 +133,7 @@ class UsersController < ApplicationController
       # TAs and Students do not need a default. TAs inherit the default from the instructor,
       # Students do not have any checks for this information.
       if @user.role.name == "Instructor" or @user.role.name == "Administrator"
-        AssignmentQuestionnaire.create(user_id: @user.id)
+        AssignmentQuestionnaire.create(assignment_questionnaire_params(user_id: @user.id))
       end
       undo_link("The user \"#{@user.name}\" has been successfully created. ")
       redirect_to action: 'list'
@@ -175,8 +175,13 @@ class UsersController < ApplicationController
     requested_user.status = params[:status]
     if requested_user.status.nil?
       flash[:error] = "Please Approve or Reject before submitting"
+<<<<<<< HEAD
     elsif requested_user.update_attributes(params[:user])
       flash[:success] = "The user \"#{requested_user.name}\" has been successfully updated."
+=======
+    elsif @user.update_attributes(user_params)
+      flash[:success] = "The user \"#{@user.name}\" has been successfully updated."
+>>>>>>> 756985284477d211d8d22b6f7b8f6f86576ae0db
     end
     if requested_user.status == "Approved"
       new_user = User.new
@@ -193,7 +198,14 @@ class UsersController < ApplicationController
         prepared_mail = MailerHelper.send_mail_to_user(new_user, "Your Expertiza account and password have been created.", "user_welcome", password)
         prepared_mail.deliver
         flash[:success] = "A new password has been sent to new user's e-mail address."
+<<<<<<< HEAD
         undo_link("The user \"#{requested_user.name}\" has been successfully created. ")
+=======
+        if @usernew.role.name == "Instructor" or @usernew.role.name == "Administrator"
+          AssignmentQuestionnaire.create(assignment_questionnaire_params(user_id: @user.id))
+        end
+        undo_link("The user \"#{@user.name}\" has been successfully created. ")
+>>>>>>> 756985284477d211d8d22b6f7b8f6f86576ae0db
       else
         foreign
       end
@@ -217,7 +229,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    params.permit!
+    # params.permit!
     @user = User.find params[:id]
     # update username, when the user cannot be deleted
     # rename occurs in 'show' page, not in 'edit' page
@@ -226,7 +238,7 @@ class UsersController < ApplicationController
       @user.name += '_hidden'
     end
 
-    if @user.update_attributes(params[:user])
+    if @user.update_attributes(user_params)
       flash[:success] = "The user \"#{@user.name}\" has been successfully updated."
       redirect_to @user
     else
@@ -297,9 +309,16 @@ class UsersController < ApplicationController
                                  :institution_id)
   end
 
+<<<<<<< HEAD
   def requested_user_params
     params.require(:user).permit(:name, :role_id, :fullname, :institution_id, :email)
       .merge(self_introduction: params[:requested_user][:self_introduction])
+=======
+  def assignment_questionnaire_params(params_hash)
+    params_local = params
+    params_local[:assignment_questionnaire] = params_hash
+    params_local.require(:assignment_questionnaire).permit(:user_id)
+>>>>>>> 756985284477d211d8d22b6f7b8f6f86576ae0db
   end
 
   def get_role
