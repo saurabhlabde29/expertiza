@@ -5,6 +5,7 @@ class CreateDutiesTable < ActiveRecord::Migration
     	t.integer :instructor_id
     	t.integer :course_id
     	t.integer :user_id
+    	
     end
   end
 end

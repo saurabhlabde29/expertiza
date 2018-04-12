@@ -102,6 +102,14 @@
       <%= label_tag('assignment_form[assignment][is_selfreview_enabled]', 'Allow self reviews?') %>
     </td>
   </tr>
+  <!--#E1808 Adding checkbox for role based reviewing--> 
+  <tr>
+    <td style='padding:5px' id='assignment_is_role_based_review_enabled'>
+      <input name="assignment_form[assignment][is_selfreview_enabled]" type="hidden" value="false"/>
+      <%= check_box_tag('assignment_form[assignment][is_selfreview_enabled]', 'true', @assignment_form.assignment.is_selfreview_enabled) %>
+      <%= label_tag('assignment_form[assignment][is_selfreview_enabled]', 'Allow self reviews?') %>
+    </td>
+  </tr>
 
 </table>
 <script>
