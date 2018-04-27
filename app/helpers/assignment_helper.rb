@@ -166,14 +166,16 @@ module AssignmentHelper
   end
 
     def duty_names(id_list,assignment_id = 0)
+      selected_duty_id = AssignmentDutyQuestionnaireMapping.get_duty_id(assignment_id)
+      count = 0
       duty_names_list = []
       id_list.each do |id|
         unless id == 0 
         temp = Duty.find(id)
-        duty_names_list << [temp.name , temp.id]
+        duty_names_list << [temp.name , temp.id] if (selected_duty_id.any?{|i| i == temp.id} == false)
        end
       end
-      duty_names_list
-    end
+    duty_names_list
+  end
 
 end
